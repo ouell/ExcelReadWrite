@@ -1,12 +1,22 @@
 ﻿using System;
+using System.IO;
+using System.Linq;
+using ExcelReadWrite.Read;
+using ExcelReadWrite.Templates.Enum;
+using static ExcelReadWrite.Application.Execute;
 
 namespace ExcelReadWrite
 {
-    class Program
+    internal static class Program
     {
-        static void Main(string[] args)
+        private static void Main()
         {
-            Console.WriteLine("Hello World!");
+            //var value = ReadFile.ReadExcelFile(TemplateType.RetornoSandoz, @"C:\Temp\sandoz.xlsx");
+            //Console.WriteLine(value);
+            // var folders = Directory.GetDirectories(@"C:\Temp\");
+            // folders.ToList().ForEach(Console.WriteLine);
+
+            RunTask();
         }
     }
 }
