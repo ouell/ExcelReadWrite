@@ -1,8 +1,4 @@
 ﻿using System;
-using System.IO;
-using System.Linq;
-using ExcelReadWrite.Read;
-using ExcelReadWrite.Templates.Enum;
 using static ExcelReadWrite.Application.Execute;
 
 namespace ExcelReadWrite
@@ -15,7 +11,6 @@ namespace ExcelReadWrite
             //Console.WriteLine(value);
             // var folders = Directory.GetDirectories(@"C:\Temp\");
             // folders.ToList().ForEach(Console.WriteLine);
-
             RunTask();
         }
     }
