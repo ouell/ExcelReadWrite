@@ -29,10 +29,19 @@ namespace ExcelReadWrite.Read
                                           Tuple<HyperaRunningNota, HyperaRunningRetorno> hyperaRunning)
         {
             var workBook = new XLWorkbook(PathControle, XLEventTracking.Disabled);
-            var sheet = workBook.Worksheets.Add($"{DateTime.Now.Day}-{DateTime.Now.Month.ToString().PadLeft(2, '0')}");
+
+            var sheetName = $"{DateTime.Now.Day}-{DateTime.Now.Month.ToString().PadLeft(2, '0')}";
+            IXLWorksheet sheet;
+            try
+            {
+                sheet = workBook.Worksheet(sheetName);
+            }
+            catch (Exception)
+            {
+                sheet = workBook.Worksheets.Add(sheetName);
+            }
 
             sheet.Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
-
 
             sheet.Cell("A1").Value = $"{DateTime.Now:dd/MM/yyyy}";
             var range = sheet.Range("A1:A9");
@@ -179,38 +188,17 @@ namespace ExcelReadWrite.Read
         private static void CreateHyperaRunning(IXLWorksheet sheet,
                                                 Tuple<HyperaRunningNota, HyperaRunningRetorno> hyperaRunning)
         {
-            sheet.Cell("B6").Value = "Hypera";
-            sheet.Cell("B6").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Left);
-            sheet.Cell("C6").Value = "Running";
-            sheet.Cell("C6").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Left);
-            sheet.Cell("D6").Value = hyperaRunning.Item2.QuantidadePendencias;
-            sheet.Cell("D6").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
-            sheet.Cell("E6").Value = hyperaRunning.Item2.DataPrimeiraPendencia;
-            sheet.Cell("E6").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
-            sheet.Cell("F6").Value = hyperaRunning.Item1.QuantidadePendencias;
-            sheet.Cell("F6").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
-            sheet.Cell("G6").Value = hyperaRunning.Item1.DataPrimeiraPendencia;
-            sheet.Cell("G6").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
-            sheet.Cell("H6").Value = "-";
-            sheet.Cell("H6").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
-            sheet.Cell("I6").Value = "-";
-            sheet.Cell("I6").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
-        }
-
-        private static void CreateSandoz(IXLWorksheet sheet,
-                                         Tuple<SandozNota, SandozRetorno> sandoz)
-        {
-            sheet.Cell("B7").Value = "Sandoz";
+            sheet.Cell("B7").Value = "Hypera";
             sheet.Cell("B7").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Left);
-            sheet.Cell("C7").Value = "Pharmalink";
+            sheet.Cell("C7").Value = "Running";
             sheet.Cell("C7").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Left);
-            sheet.Cell("D7").Value = sandoz.Item2.QuantidadePendencias;
+            sheet.Cell("D7").Value = hyperaRunning.Item2.QuantidadePendencias;
             sheet.Cell("D7").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
-            sheet.Cell("E7").Value = sandoz.Item2.DataPrimeiraPendencia;
+            sheet.Cell("E7").Value = hyperaRunning.Item2.DataPrimeiraPendencia;
             sheet.Cell("E7").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
-            sheet.Cell("F7").Value = sandoz.Item1.QuantidadePendencias;
+            sheet.Cell("F7").Value = hyperaRunning.Item1.QuantidadePendencias;
             sheet.Cell("F7").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
-            sheet.Cell("G7").Value = sandoz.Item1.DataPrimeiraPendencia;
+            sheet.Cell("G7").Value = hyperaRunning.Item1.DataPrimeiraPendencia;
             sheet.Cell("G7").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
             sheet.Cell("H7").Value = "-";
             sheet.Cell("H7").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
@@ -218,25 +206,46 @@ namespace ExcelReadWrite.Read
             sheet.Cell("I7").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
         }
 
-        private static void CreateSanofi(IXLWorksheet sheet,
-                                         Tuple<SanofiNota, SanofiRetorno> sanofi)
+        private static void CreateSandoz(IXLWorksheet sheet,
+                                         Tuple<SandozNota, SandozRetorno> sandoz)
         {
-            sheet.Cell("B8").Value = "Sanofi";
+            sheet.Cell("B8").Value = "Sandoz";
             sheet.Cell("B8").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Left);
-            sheet.Cell("C8").Value = "Fidelize";
+            sheet.Cell("C8").Value = "Pharmalink";
             sheet.Cell("C8").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Left);
-            sheet.Cell("D8").Value = sanofi.Item2.QuantidadePendencias;
+            sheet.Cell("D8").Value = sandoz.Item2.QuantidadePendencias;
             sheet.Cell("D8").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
-            sheet.Cell("E8").Value = sanofi.Item2.DataPrimeiraPendencia;
+            sheet.Cell("E8").Value = sandoz.Item2.DataPrimeiraPendencia;
             sheet.Cell("E8").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
-            sheet.Cell("F8").Value = sanofi.Item1.QuantidadePendencias;
+            sheet.Cell("F8").Value = sandoz.Item1.QuantidadePendencias;
             sheet.Cell("F8").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
-            sheet.Cell("G8").Value = sanofi.Item1.DataPrimeiraPendencia;
+            sheet.Cell("G8").Value = sandoz.Item1.DataPrimeiraPendencia;
             sheet.Cell("G8").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
             sheet.Cell("H8").Value = "-";
             sheet.Cell("H8").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
             sheet.Cell("I8").Value = "-";
             sheet.Cell("I8").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+        }
+
+        private static void CreateSanofi(IXLWorksheet sheet,
+                                         Tuple<SanofiNota, SanofiRetorno> sanofi)
+        {
+            sheet.Cell("B9").Value = "Sanofi";
+            sheet.Cell("B9").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Left);
+            sheet.Cell("C9").Value = "Fidelize";
+            sheet.Cell("C9").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Left);
+            sheet.Cell("D9").Value = sanofi.Item2.QuantidadePendencias;
+            sheet.Cell("D9").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+            sheet.Cell("E9").Value = sanofi.Item2.DataPrimeiraPendencia;
+            sheet.Cell("E9").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+            sheet.Cell("F9").Value = sanofi.Item1.QuantidadePendencias;
+            sheet.Cell("F9").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+            sheet.Cell("G9").Value = sanofi.Item1.DataPrimeiraPendencia;
+            sheet.Cell("G9").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+            sheet.Cell("H9").Value = "-";
+            sheet.Cell("H9").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+            sheet.Cell("I9").Value = "-";
+            sheet.Cell("I9").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
         }
 
         public static BaseDomain ReadData(string path,
@@ -245,17 +254,31 @@ namespace ExcelReadWrite.Read
         {
             var xlsFile = ReadExcelFile(path, sheetName);
 
+            if (xlsFile == null)
+            {
+                return new BaseDomain
+                {
+                    QuantidadePendencias = "-",
+                    DataPrimeiraPendencia = "-"
+                };
+            }
+            
             var maxRows = xlsFile.RowsUsed().Count();
             var maxColumns = xlsFile.ColumnsUsed().Count();
 
-            var listDate = new List<DateTime>();
-            for (var row = 2;
-                 row <= maxRows;
-                 row++)
+            if (maxRows == 0)
             {
-                for (var column = 1;
-                     column <= maxColumns;
-                     column++)
+                return new BaseDomain
+                {
+                    QuantidadePendencias = "-",
+                    DataPrimeiraPendencia = "-"
+                };
+            }
+            
+            var listDate = new List<DateTime>();
+            for (var row = 2; row <= maxRows; row++)
+            {
+                for (var column = 1; column <= maxColumns; column++)
                 {
                     var value = xlsFile.Cell(row, column);
                     if (value.Address?.ColumnLetter == columnLetter)
@@ -275,10 +298,22 @@ namespace ExcelReadWrite.Read
         public static List<string> CreateLines(string path)
         {
             var xlsFile = ReadExcelFile(path);
+            var listRetorno = new List<string>();
+            if (xlsFile == null)
+            {
+                return listRetorno;
+            }
+                
             
             var maxColumns = xlsFile.ColumnsUsed().Count();
             var maxRows = xlsFile.RowsUsed().Count();
-            var listRetorno = new List<string>();
+
+            if (maxRows == 0)
+            {
+                return listRetorno;
+            }
+            
+            
             for (var row = 2; row <= maxRows; row++)
             {
                 var text = new StringBuilderWrapper();
@@ -302,7 +337,7 @@ namespace ExcelReadWrite.Read
             var workSheet = string.IsNullOrEmpty(sheetName) ? workBook.Worksheets.First() : workBook.Worksheet(sheetName);
 
             if (workSheet == null)
-                throw new ArgumentException("Planilha não existe");
+                return null;
 
             workSheet.Columns().CellsUsed();
 

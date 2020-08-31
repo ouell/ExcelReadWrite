@@ -22,6 +22,19 @@ namespace ExcelReadWrite.Templates
             var listData = new List<string>();
             listData.AddRange(ExcelServices.CreateLines(file));
 
+            if (!listData.Any())
+            {
+                return new Tuple<HyperaRunningNota, HyperaRunningRetorno>(new HyperaRunningNota
+                {
+                    QuantidadePendencias = "-",
+                    DataPrimeiraPendencia = "-"
+                }, new HyperaRunningRetorno
+                {
+                    QuantidadePendencias = "-",
+                    DataPrimeiraPendencia = "-"
+                });
+            }
+            
             var listaDataRetorno = new List<DateTime>();
             var listaDataNota = new List<DateTime>();
 

@@ -79,15 +79,7 @@ namespace ExcelReadWrite.Application
                      sanofi = Sanofi.ReadSanofi(folder);
                  }
              };
-             // Parallel.ForEach(folders,
-             //                  folder =>
-             //                  {
-             //                    if(folder.Contains("sandoz"))
-             //                    {
-             //                        sandoz = Sandoz.ReadSandoz(folder);
-             //                    }
-             //                  });
-
+             
              ExcelServices.CreateControle(ache, biolab, sandoz, sanofi, boehringer, astrazeneca, hyperaPharma, hyperaRunning);
              
              var end = DateTime.Now;
